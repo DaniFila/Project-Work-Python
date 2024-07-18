@@ -38,6 +38,16 @@ class DataSet:
         self.save_csv(self.nome_file)
         print("Colonna aggiunta con successo!")
 
+    def esplorazione_dati(self):
+        relazione = self.df.groupby("Churn").mean()[['Età', 'Durata_Abonnamento', 'Tariffa_Mensile']]
+        self.df['Churn'] = self.df['Churn'].map({'No': 0, 'Sì': 1}) # sostituisco momentaneamente le stringhe NO e SI con 0 e 1 per verificare le possibili correlazioni
+        correlazioni = self.df.corr()
+        self.df['Churn'] = self.df['Churn'].map({0: "No", 1: "Sì"})
+        print(f"\nTabella di relazione tra Età, Durata_Abonnamento, Tariffa_Mensile e la Churn:\n{relazione}\n")
+        print(f"\nCorrelazioni tra variabili:\n{correlazioni}\n")
+
+
+
 
 
 
@@ -45,6 +55,4 @@ class DataSet:
 
 
 a = DataSet("Corso Python/Giovedì 18/Progetto_Python_1.csv")
-
-#a.esplorazione_dati()
 
