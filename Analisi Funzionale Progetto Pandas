@@ -35,14 +35,13 @@ Valutare la performance del modello attraverso metriche come l'accuratezza e l'A
 
 TEMPISTICHE:
 
-CREAZIONE DATASET: 7 minuti
-CARICAMENTO E ESPLORAZIONE INIZIALE: 4 minuti
-ESAMINAZIONE DATI: 8 minuti
-PULIZIA DATI: 15 minuti
+CARICAMENTO E ESPLORAZIONE INIZIALE: 20 minuti
+ESAMINAZIONE DATI: 10 minuti
+PULIZIA DATI: 10 minuti
 ANALISI ESPLORATIVA DATI: 20 minuti
 PREPARAZIONE DATI PER MODELLAZIONE: 15 minuti
 ANALISI STATISTICA E PREDITTIVA: Opzionale
 
-TEMPO TOTALE PREVISTO: 69 MINUTI 
+TEMPO TOTALE PREVISTO: 75 MINUTI 
 
 (queste tempistiche sono predittive, i tempi reali per la risoluzione del progetto verranno dichiarati alla fine dello svolgimento)
