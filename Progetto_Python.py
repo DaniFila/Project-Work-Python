@@ -33,6 +33,12 @@ class DataSet:
         print("DataSet Pulito con successo!\n")
         self.save_csv(self.nome_file)
 
+    def aggiungi_colonna_costo_per_GB(self):
+        self.df['Costo_per_GB'] = self.df['Tariffa_Mensile'] / self.df['Dati_Consumati']
+        self.save_csv(self.nome_file)
+        print("Colonna aggiunta con successo!")
+
+
 
 
 
