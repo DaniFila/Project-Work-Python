@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 class DataSet: # classe DataSet
     def __init__(self,nome_file): # classe costruttore dove gli passo il percorso del file
         self.df = pd.read_csv(nome_file) # col percorso legge il file csv e lo salva in un DataFrame
@@ -60,6 +61,16 @@ class DataSet: # classe DataSet
                 self.df[colonna] = (self.df[colonna]- np.mean(self.df[colonna])) / np.std(self.df[colonna]) 
             print("Colonne normalizzate con successo!")
             self.save_csv("Corso Python/Giovedì 18/Progetto_Python_1_ready_modelling.csv") 
+    
+    def visualizza_statistiche_età(self):
+        plt.figure(figsize=(10,6)) # inizializzo le dimensioni della figura
+        sns.histplot(self.df["Età"],bins=30,kde=True) # Creo un Istogramma della colonna età con 30 bin, cioè che il range di valori sarà suddiviso in 30 intervalli uguali
+        plt.title("Distribuzione delle Età:") # definisco il titolo
+        plt.xlabel("Età") # Asse X definisco Età
+        plt.ylabel("Frequenza") # Asse Y definisco Frequenza
+        plt.show() # per mostrare il grafico
+        
+
 
 
 
