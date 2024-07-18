@@ -69,7 +69,14 @@ class DataSet: # classe DataSet
         plt.xlabel("Età") # Asse X definisco Età
         plt.ylabel("Frequenza") # Asse Y definisco Frequenza
         plt.show() # per mostrare il grafico
-        
+
+    def visualizza_statistiche_tariffe_mensili(self):
+        plt.figure(figsize=(10,6)) # inizializzo le dimensioni della figura
+        sns.boxplot(x = "Tariffa_Mensile",data=self.df) # Creo un Boxlot 
+        plt.title("Grafico Tariffe Mensili") # definisco il titolo
+        plt.xlabel("Tariffa Mensile") # definisco il nome dell'asse X
+        plt.show() # per mostrare il grafico
+
 
 
 
