@@ -10,7 +10,7 @@ class DataSet: # classe DataSet
         self.df.to_csv(nome_file,index=False)
         print("Salvato con successo!")
     
-    def esplorazione_dati(self): # metodo che stampa l'esplorazione dei dati, le info generali del dataframe, le statistiche dei dati, e il count del numero dei clienti in compagnia e non
+    def info(self): # metodo che stampa l'esplorazione dei dati, le info generali del dataframe, le statistiche dei dati, e il count del numero dei clienti in compagnia e non
         print("\nDescrizione generale del Dataset:\n")
         print(f"Informazioni:\n{self.df.info()}\n")
         print(f"Statistiche:\n{self.df.describe()}\n")
@@ -48,12 +48,18 @@ class DataSet: # classe DataSet
 
     def preparazione_dati(self): # metodo che prepara i dati per la modellazione
         self.df['Churn'] = self.df['Churn'].map({'No': 0, 'Sì': 1}) # imposto i valori nella colonna Churn con 0 e 1 al posto di Si e NO
-        colonne = ["ID_Cliente","Età","Durata_Abonnamento","Tariffa_Mensile","Dati_Consumati","Servizio_Clienti_Contatti","Churn","Costo_per_GB"]
-        for colonna in colonne:
-            self.df[colonna] = (self.df[colonna]- np.mean(self.df[colonna])) / np.std(self.df[colonna]) # normalizzo le colonne scandendo al lista contenenti i nomi delle colonne e andando a usare la formula del valore - la media del valore tutto diviso la deviazione standard
-        print("Colonne normalizzate con successo!")
-        self.save_csv("Corso Python/Giovedì 18/Progetto_Python_1_ready_modelling.csv") # salvo in un nuovo file i dataframe in formato csv pronto per la modellazione
-
+        try: # effettuo questa verifica nel caso in cui non fosse stata creata la colonna Costo_per_GB
+            colonne = ["ID_Cliente","Età","Durata_Abonnamento","Tariffa_Mensile","Dati_Consumati","Servizio_Clienti_Contatti","Churn","Costo_per_GB"]
+            for colonna in colonne:
+                self.df[colonna] = (self.df[colonna]- np.mean(self.df[colonna])) / np.std(self.df[colonna]) # normalizzo le colonne scandendo al lista contenenti i nomi delle colonne e andando a usare la formula del valore - la media del valore tutto diviso la deviazione standard
+            print("Colonne normalizzate con successo!")
+            self.save_csv("Corso Python/Giovedì 18/Progetto_Python_1_ready_modelling.csv") # salvo in un nuovo file i dataframe in formato csv pronto per la modellazione
+        except:
+            colonne = ["ID_Cliente","Età","Durata_Abonnamento","Tariffa_Mensile","Dati_Consumati","Servizio_Clienti_Contatti","Churn"]
+            for colonna in colonne:
+                self.df[colonna] = (self.df[colonna]- np.mean(self.df[colonna])) / np.std(self.df[colonna]) 
+            print("Colonne normalizzate con successo!")
+            self.save_csv("Corso Python/Giovedì 18/Progetto_Python_1_ready_modelling.csv") 
 
 
 
