@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, roc_auc_score, classification_report
 class DataSet: # classe DataSet
 
     def __init__(self,nome_file): # classe costruttore dove gli passo il percorso del file
@@ -108,8 +111,37 @@ class DataSet: # classe DataSet
         except:
             print("\nErrore, non è stato possibile visualizzare le statistiche relative le tariffe mensili!")
 
+    def regressione_logistica(self):
+        # si separano le caratteristiche dall'etichetta
+        X = self.df.drop("Churn", axis=1)
+        y = self.df["Churn"]
+        
+        # si dividono i dati in seti di allenamento e di test, la funzione train_test_split divide i dati in set di allenamento e uno per il test
+        # test_size = 0.2 indica che il 20% dei dati lo utilizza per il test e il restante per l'allenamento
+        # random_state = 42 fa si che la divisione si ripeta
+        X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2,random_state=42)
 
+        # con la funzione LogisticRegression() crea un'istanza del modello di regressione logistica cioé l'algoritmo che andremo a utilizzare
+        modello = LogisticRegression()
 
+        # con modello.fit si vanno ad addestrare i dati sull'istanza del modello che abbiamo inizializzato
+        modello.fit(X_train,y_train)
 
+        # con la funzione predict() restituisce le previsioni binarie per il set di test
+        y_pred = modello.predict(X_test)
 
+        # con la funzione predict_proba() restituisce una matrice con 2 colonne, la prima contiene la probabilità per 0, la seconda per 1, utilizzo [:,1] per selezionare la seconda colonna
+        y_pred_proba = modello.predict_proba(X_test)[:,1]
 
+        # con la funzione accuracy_score serve a calcolare l'accuratezza del modello e va a confrontare le etichette reali
+        accuratezza = accuracy_score(y_test,y_pred)
+        print(f"Livello di Accuratezza: {accuratezza}")
+
+        # con la funzione roc_auc_score andiamo a misurare le performance del modello
+        # un modello perfetto avrà un AUC di 1.0, invece un modello meno efficace potrebbe essere uguale a 0.5, più questo numero si avvicina a 1 e migliore è la performance del modello
+
+        AUC = roc_auc_score(y_test,y_pred_proba)
+        print(f"Livello di AUC: {AUC}")
+
+        # con la funzione classification_report va a stampare un report dettagliato delle metriche di valutazione
+        print(f"Rapporto di Classificazione:\n{classification_report(y_test,y_pred)}")

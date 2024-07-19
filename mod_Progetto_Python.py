@@ -9,6 +9,7 @@ def menu(): # funzione menù che stampa le possibili scelte e richiede all'utent
 6: Esplorazione dei Dati
 7: Visualizza statistiche Età
 8: Visualizza statistiche Tariffe Mensili
+9: Analisi Statistica e Predittiva
 0: Exit
 Indicare la scelta: """
     s = input(info)
@@ -36,6 +37,8 @@ def main(): # funzione main che richiama tutte le altre funzioni e il modulo imp
                 df.visualizza_statistiche_età()
             elif s == "8":
                 df.visualizza_statistiche_tariffe_mensili()
+            elif s == "9":
+                df.regressione_logistica()
             elif s == "0":
                 print("\nArrivederci!")
                 break
