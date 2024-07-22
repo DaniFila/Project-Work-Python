@@ -54,7 +54,5 @@ class Parco:
 
 
 
-a = Parco()
-a.visual_deviazione_mensile()
 
 
