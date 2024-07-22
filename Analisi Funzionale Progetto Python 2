@@ -32,3 +32,36 @@ Visualizzazione dei Dati = 15 minuti
 Specializzazione = 30 minuti
 
 Tempo totale previsto = 100 minuti
+
+---------------------------------------------------------------------------------------------------------
+secondo le mie previsioni iniziali, la durata totale per concludere il progetto coincide con il tempo totale previso.
+per la risoluzione, ho utilizzato una classe per gestire la generazione, la gestione, l'analisi e la visualizzazione del DataFrame del parco
+con il numero di visitatori giornalieri.
+
+Generazione dei Dati e Creazione DataFrame:
+per la generazione dei dati ho creato un metodo "crea_df" dove al suo interno ho creato 3 array attraverso l'uso della libreria NumPy, il primo
+array salvato nella variabile "incremento" ho generato una serie di numeri equidistanti da 0 a 10 di 365 numeri per sommarli come incremento ad ogni giorno nel numero visitatori.
+Il secondo array salvato nella variabile "visitatori_giornalieri", ho generato 365 valori che entravano in media al valore 2000 con una deviazione massima di 500 attraverso, al tutto vado a sommare incremento
+il metodo della libreria NumPy random.normal().
+Il terzo array salvato nella variabile "date", ho generato attraverso il metodo della libreria NumPy date_range(), 365 date.
+Infine ho creato il DataFrame Pandas, con indice le date, e come unica colonna chiamata "Visitatori", il numero dei visitatori.
+
+Analisi dei Dati:
+per l'analisi dei dati, ho creato 3 metodi:
+
+visitatori_per_mese - questo metodo sfrutta il metodo della libreria Pandas resample() e il metodo mean() per effettuare la media mensile dei visitatori basandosi sull'indice della data che è in formato data,
+il risultato è una Series da dove poi ho formato un DataFrame che viene ritornato nel metodo che sfrutterò per la visualizzazione in seguito.
+
+deviazione_standard_mensile - questo metodo funziona esattamente come il metodo visitatori_per_mese ma sfrutta il metodo std() per calcolare la deviazione standard.
+
+media_mobile - questo metodo crea una nuova colonna al DataFrame attraverso il metodo rolling() di Pandas e il metodo mean() per calcolare la media mobile di 7 giorni.
+
+Visualizzazione dei Dati:
+per la visualizzazione dei dati ho creato 3 metodi che sfruttano le librerie di Matplotlit e Seaborn, per visualizzare rispettivamente:
+con un grafico a linee l'andamento dei visitatori giornalieri e la media mobile di 7 giorni.
+E con 2 grafici a barre la media mensile e la deviazione mensile dei visitatori.
+
+Specializzazione:
+per la specializzazione ho creato una funzione menu() che stampa varie operazioni che l'utente può svolgere, richiedendo da input l'operazione, e infine una funzione main() dove vengono richiamati tutti i metodi.
+
+
